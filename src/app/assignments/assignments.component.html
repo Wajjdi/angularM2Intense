@@ -1,0 +1,11 @@
+<p>composant fils de gestion des assingnement! {{titre}}</p>
+<div *ngFor="let a of assignement">
+<p *ngIf = "a.rendu; else nonsoumis">
+  Devoir {{a.nom}} la date de rendu {{a.dateDeRendu}} rendu ou pas ? {{a.rendu}}
+</p>
+<ng-template #nonsoumis>
+    <p >
+        Devoir {{a.nom}} la date de rendu {{a.dateDeRendu}} rendu ou pas ? {{a.rendu}}
+      </p>
+</ng-template>
+</div>
