@@ -1,0 +1,11 @@
+<p>assignment-detail works!</p>
+
+<p> assignment transmis par le pere sous la forme d'attribut calculé :</p>
+<p >{{assignmentTransmis.nom}}</p>
+
+<mat-card *ngIf="assignmentTransmis" >
+<mat-card-title>
+{{assignmentTransmis.nom}}
+</mat-card-title>
+<mat-card-subtitle> {{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
+</mat-card>

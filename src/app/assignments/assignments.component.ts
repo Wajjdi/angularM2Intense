@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Assignment } from './assignment.model';
 
 @Component({
   selector: 'app-assignments',
@@ -7,20 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssignmentsComponent implements OnInit {
 titre='liste des devoirs'
-assignement = [
+nomDevoir="";
+dateDeRendu!: Date;
+boutonDesactiver=true;
+assignementSelectionne!: Assignment;
+
+assignment :Assignment[]= [
   {
     nom: 'devoir angular de Mr Buffa',
-    dateDeRendu:'2021-11-30',
+    dateDeRendu: new Date('2021-02-14'),
     rendu:false
   },
   {
     nom: 'devoir web component de Mr Buffa',
-    dateDeRendu:'2021-11-30',
+    dateDeRendu:new Date('2021-02-14'),
     rendu:true
   },
   {
     nom: 'devoir ND de Mr Mopole',
-    dateDeRendu:'2021-11-30',
+    dateDeRendu:new Date('2021-02-14'),
     rendu:true
   }
 ]
@@ -28,6 +34,24 @@ assignement = [
 
   ngOnInit(): void {
     console.log("appelé a l'initialisation du composant");
+    setTimeout(() => {
+    this.boutonDesactiver=false;
+    }, 2000);
+    
   }
+  onSubmit() {
+    console.log("onSubmit : "+ this.nomDevoir + "date de rendu :" + this.dateDeRendu);
+    let nouveAssignement = new Assignment();
+    nouveAssignement.nom=this.nomDevoir;
+    nouveAssignement.dateDeRendu=this.dateDeRendu;
+    nouveAssignement.rendu=false;
+    this.assignment.push(nouveAssignement);
+    console.log(this.assignment);
+  }
+  assignmentClique(assignment:Assignment) {
+    this.assignementSelectionne = assignment;
+    console.log(this.assignementSelectionne.nom);
+  }
+
 
 }
