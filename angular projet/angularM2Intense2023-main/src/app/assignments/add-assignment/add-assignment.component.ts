@@ -12,7 +12,14 @@ export class AddAssignmentComponent implements OnInit {
 
 // Pour le formulaire
 nomDevoir = "";
+nomAuteur = "";
+nomMatiere = "";
+imgMatiere = "";
+imgProf = "";
+remarque = "";
+note=0
 dateDeRendu!:Date;
+
   constructor(private assignmentsService:AssignmentsService,
               private router:ActivatedRoute) { }
 
@@ -20,15 +27,29 @@ dateDeRendu!:Date;
   }
 
   onSubmit(){
-    console.log("onSubmit : " + this.nomDevoir +
-                " date de rendu : " + this.dateDeRendu);
+    console.log(this.imgProf,"ss")
+    if(this.nomMatiere == "Grails"){
+      this.imgProf = "../../assets/grigri.png"
+      this.imgMatiere =  "../../assets/grigri.png"
+  }
+  else if(this.nomMatiere == "BD"){
+    this.imgProf = "../../assets/moi.png"
 
+  }
+    
     // On ajoute un nouvel assignment
     let nouvelAssignment = new Assignment();
     nouvelAssignment.nom = this.nomDevoir;
     nouvelAssignment.dateDeRendu = this.dateDeRendu;
     nouvelAssignment.rendu = false;
     nouvelAssignment.id = Math.floor(Math.random()*100000000000000000);
+    nouvelAssignment.nomAuteur = this.nomAuteur;
+    nouvelAssignment.nomMatiere = this.nomMatiere;
+    nouvelAssignment.imgProf = this.imgProf;
+    nouvelAssignment.imgMatiere = this.imgMatiere;
+    nouvelAssignment.remarque = this.remarque;
+    nouvelAssignment.note = this.note;
+
     // le tableau est chez le papa comment faire ?
     //this.assignments.push(nouvelAssignment);
 
@@ -40,7 +61,15 @@ dateDeRendu!:Date;
       // VERS LE COMPOSANT QUI AFFICHE LA LISTE
       //this.router.navigate(['/home']);
     });
+    
 
+
+  console.log("onSubmit : " + this.nomDevoir +
+  " date de rendu : " + this.dateDeRendu +
+  "nomAuteur : " + this.nomAuteur +
+  "nomMatiere : " + this.nomMatiere +
+  "image" + this.imgProf );
   }
+
 
 }

@@ -13,19 +13,39 @@ export class AssignmentsService {
       id:1,
       nom: 'Devoir Angular de Mr Buffa',
       dateDeRendu: new Date('2022-11-30'),
-      rendu:false
+      rendu:false,
+      nomAuteur : "Ayoub",
+      nomMatiere : "Bd",
+      imgProf: "",
+      imgMatiere: "",
+      remarque:"",
+      note:0,
+
     },
     {
       id:2,
       nom: 'Devoir WebComponents de Mr Buffa',
       dateDeRendu: new Date('2022-09-30'),
-      rendu:false
+      rendu:false,
+      nomAuteur : "Wajdi",
+      nomMatiere : "Bd",
+      imgProf: "",
+      imgMatiere: "",
+      remarque:"",
+      note:0,
     },
     {
       id:3,
       nom: 'Devoir BD de Mr Mopolo',
       dateDeRendu: new Date('2022-09-30'),
-      rendu:true
+      rendu:true,
+      nomAuteur : "Neymar",
+      nomMatiere : "Bd",
+      imgProf: "",
+      imgMatiere: "",
+      remarque:"",
+      note:0,
+
     }
   ]
   constructor(private loggingService:LoggingService,

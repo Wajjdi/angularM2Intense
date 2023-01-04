@@ -10,7 +10,10 @@ import { Assignment } from '../assignment.model';
 })
 export class AssignmentDetailComponent implements OnInit {
   assignmentTransmis!: Assignment|undefined ;
-
+  nomAssignment:string="";
+  dateDeRendu!:Date;
+  note!:number;
+  rendu!: boolean;
   constructor(private assignmentsService: AssignmentsService,
               private route:ActivatedRoute,
               private router:Router) {}
@@ -19,7 +22,10 @@ export class AssignmentDetailComponent implements OnInit {
   // cycle de vie du composant
   ngOnInit(): void {
     this.getAssignment();
+    
   }
+
+
 
   getAssignment() {
     // on récupère l'id dans l'url
@@ -28,6 +34,16 @@ export class AssignmentDetailComponent implements OnInit {
     this.assignmentsService.getAssignment(id)
     .subscribe((assignment) => {
       this.assignmentTransmis = assignment;
+     
+      if(!assignment) return;
+
+      this.assignmentTransmis = assignment;
+      this.note = assignment.note;
+      this.rendu = assignment.rendu;
+      console.log(this.note)
+      if(this.note == null){
+        this.assignmentTransmis.rendu = true;
+      }
     });
   }
 
@@ -42,6 +58,7 @@ export class AssignmentDetailComponent implements OnInit {
         // la liste des assignments
         this.router.navigate(["/home"]);
       });
+    
   }
 
   onDeleteAssignment() {
