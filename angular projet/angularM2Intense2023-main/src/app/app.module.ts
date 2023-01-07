@@ -24,6 +24,8 @@ import { RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { Search } from './assignments/Search';
+
 
 const routes: Routes = [
   {
@@ -55,7 +57,8 @@ const routes: Routes = [
     AssignmentsComponent,
     AssignmentDetailComponent,
     AddAssignmentComponent,
-    EditAssignmentComponent
+    EditAssignmentComponent,
+    Search
   ],
   imports: [
     BrowserModule,

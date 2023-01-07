@@ -7,10 +7,35 @@
           Ajouter Assignment
     </button>
 </a>
-  <mat-list *ngFor="let a of assignments">
+
+<div>
+  <input  type="text" placeholder="Search"  [(ngModel)]="searchText">
+  <table >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of assignments | search: searchText ">
+        <td>{{a.id}}</td>
+        <td>{{a.nom}}</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+<button  (click)="hideData()">Hide Data</button>
+
+  <mat-list *ngFor="let a of assignments"  >
+
+    <div *ngIf="element || a.rendu !== false"  >
     <nav>
     <a routerLink="/assignment/{{a.id}}">
-      <mat-list-item>
+      <mat-list-item  >
         <h3 mat-line>{{a.nom}}</h3>
         <p mat-line>{{a.dateDeRendu | date}}</p>
         <mat-icon mat-list-icon *ngIf="a.rendu">done</mat-icon>
@@ -46,7 +71,7 @@
       <p>  {{a.note}} </p>
     </div>
    
-
+  </div>
   </mat-list>
 
 
