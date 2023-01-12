@@ -1,89 +1,81 @@
 <h2>{{titre}}</h2>
 
-<main >
+<main>
   <a routerLink="/add">
-    <button mat-flat-button color="accent"
-    >
-          Ajouter Assignment
+    <button mat-flat-button color="accent">
+      Ajouter Assignment
     </button>
-</a>
+  </a>
 
 
 
 
-<div>
-  <input  type="text" placeholder="Search"  [(ngModel)]="searchText">
-  <table >
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let a of pageSlice | search: searchText    ">
-        <td>{{a.id}}</td>
-        <td>{{a.nom}}</td>
-      </tr>
-      
-    </tbody>
-  </table>
-</div>
+  <div>
+    <input type="text" placeholder="Search" [(ngModel)]="searchText">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of pageSlice | search: searchText    ">
+          <td>{{a.id}}</td>
+          <td>{{a.nom}}</td>
+        </tr>
 
-
-<mat-paginator class="mat-elevation-z8"
-[length]="this.assignments.length"
-[pageSize]="3"
-[pageSizeOptions]="[3, 5, 10]"
-(page)="OnPageChange($event)"
->
-
-</mat-paginator>
-
-<button  (click)="hideData()">Hide Data</button>
-
-  <mat-list *ngFor="let a of assignments"  >
-
-    <div *ngIf="element || a.rendu !== false"  >
-    <nav>
-    <a routerLink="/assignment/{{a.id}}">
-      <mat-list-item  >
-        <h3 mat-line>{{a.nom}}</h3>
-        <p mat-line>{{a.dateDeRendu | date}}</p>
-        <mat-icon mat-list-icon *ngIf="a.rendu">done</mat-icon>
-      </mat-list-item>
-    <h3 mat-subheader>{{a.dateDeRendu | date}}</h3>
-    <mat-list-item [ngClass]="{'rendu':a.rendu, 'nonRendu':!a.rendu}"
-                   (click)="assignmentClique(a)"
-    >
-
-      <p *ngIf="a.rendu; else nonsoumis">
-        {{a.nom}} a été rendu.
-      </p>
-      <ng-template #nonsoumis>
-        <p>
-          {{a.nom}} n'a pas été rendu à temps.
-        </p>
-      </ng-template>
-      <mat-divider></mat-divider>
-    </mat-list-item>
-    </a>
-    </nav>
-    <h3> {{a.nomMatiere}}  ouiiiii </h3>
-    <h3> {{a.imgProf}}   {{a.imgMatiere}}  ouiiiii super </h3>
-    <div>
-     
-      <img src="../../assets/grigri.png" alt="Logo de MDN">
-
-      <img src= {{a.imgProf}} alt="Logo de MDN">
-
-      <img src= {{a.imgMatiere}} alt="Logo de MDN">
-
-      <p>  {{a.remarque}} </p>
-      <p>  {{a.note}} </p>
-    </div>
-   
+      </tbody>
+    </table>
   </div>
+
+
+  <mat-paginator class="mat-elevation-z8" [length]="this.assignments.length" [pageSize]="3"
+    [pageSizeOptions]="[3, 5, 10]" (page)="OnPageChange($event)">
+
+  </mat-paginator>
+
+  <button (click)="hideData()">Hide Data</button>
+
+  <mat-list *ngFor="let a of assignments">
+
+    <div *ngIf="hide || a.rendu !== false">
+      <nav>
+        <a routerLink="/assignment/{{a.id}}">
+          <mat-list-item>
+            <h3 mat-line>{{a.nom}}</h3>
+            <p mat-line>{{a.dateDeRendu | date}}</p>
+            <mat-icon mat-list-icon *ngIf="a.rendu">done</mat-icon>
+          </mat-list-item>
+          <h3 mat-subheader>{{a.dateDeRendu | date}}</h3>
+          <mat-list-item [ngClass]="{'rendu':a.rendu, 'nonRendu':!a.rendu}" (click)="assignmentClique(a)">
+            <p *ngIf="a.rendu; else nonsoumis">
+              {{a.nom}} a été rendu.
+            </p>
+            <ng-template #nonsoumis>
+              <p>
+                {{a.nom}} n'a pas été rendu à temps.
+              </p>
+            </ng-template>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </a>
+      </nav>
+      <h3> {{a.nomMatiere}} ouiiiii </h3>
+      <h3> {{a.imgProf}} {{a.imgMatiere}} ouiiiii super </h3>
+      <div>
+
+        <img src="../../assets/grigri.png" alt="Logo de MDN">
+
+        <img src={{a.imgProf}} alt="Logo de MDN">
+
+        <img src={{a.imgMatiere}} alt="Logo de MDN">
+
+        <p> {{a.remarque}} </p>
+        <p> {{a.note}} </p>
+      </div>
+
+    </div>
   </mat-list>
 
 

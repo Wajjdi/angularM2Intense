@@ -4,6 +4,7 @@ import { Assignment } from './assignment.model';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import * as e from 'express';
 
 
 
@@ -15,49 +16,49 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export class AssignmentsComponent implements OnInit {
 
-
-  currentItemsToShow= [];
-  titre="Liste des devoirs";
-  assignmentSelectionne!:Assignment;
+  hide = true;
+  currentItemsToShow = [];
+  titre = "Liste des devoirs";
+  assignmentSelectionne!: Assignment;
   element = true;
   dateDeRendu = true;
   searchText = '';
-  assignments:Assignment[] = [];
-  
+  assignments: Assignment[] = [];
+
   pageEvent: PageEvent;
-  pageSlice = this.assignments.slice(0,3)
+  pageSlice = this.assignments.slice(0, 3)
 
 
 
-  constructor(private assignmentsService:AssignmentsService) {  
+  constructor(private assignmentsService: AssignmentsService) {
 
   }
   @ViewChild('paginator') paginator: MatPaginator;
-  @ViewChild('paginatorPageSize') paginatorPageSize: MatPaginator; 
+  @ViewChild('paginatorPageSize') paginatorPageSize: MatPaginator;
 
 
-  
 
-   ngOnInit(): void {
+
+  ngOnInit(): void {
     console.log("appelé à l'initialisation du composant");
     //this.assignmentsService.peuplerBD();
     this.assignmentsService.getAssignments()
-    .subscribe(assignments  => {
-      this.assignments = assignments
+      .subscribe(assignments => {
+        this.assignments = assignments
 
-      this.pageSlice = this.assignments.slice(0,3)
+        this.pageSlice = this.assignments.slice(0, 3)
 
 
-    });
-   
-      
+      });
+
+
   }
 
-  OnPageChange(event : PageEvent){
+  OnPageChange(event: PageEvent) {
 
     const startIndex = event.pageIndex * event.pageSize
     let endIndex = startIndex + event.pageSize;
-    this.pageSlice= this.assignments.slice(startIndex,endIndex)
+    this.pageSlice = this.assignments.slice(startIndex, endIndex)
     this.getAssignment();
   }
 
@@ -65,35 +66,43 @@ export class AssignmentsComponent implements OnInit {
     // on récupère l'id dans l'url
     // Le + force la conversion en number
     this.assignmentsService.getAssignments()
-    .subscribe((assignment) => {
-      if(!assignment) return;
+      .subscribe((assignment) => {
+        if (!assignment) return;
 
-      this.assignments = assignment;
-     
-    });
+        this.assignments = assignment;
+
+      });
   }
-  
+
 
   hideData() {
-    this.assignmentsService.getAssignments()
-    .subscribe(assignments  => {
-      this.assignments = assignments
-        for (let i = 0; i < assignments.length; i++) {
-          console.log(assignments[i],this.element)
-          if(assignments[i].rendu == true){
-            this.element = false;
-            console.log("acc",assignments[i], this.element)
+    this.hide = !this.hide;
+    if (this.hide == true) {
+      this.assignmentsService.getAssignments()
+        .subscribe(assignments => {
+          this.assignments = assignments
+          for (let i = 0; i < assignments.length; i++) {
+            console.log(assignments[i], this.element)
+            if (assignments[i].rendu == true) {
+              this.element = false;
+              console.log("acc", assignments[i], this.element)
+            }
           }
-        }
-    });
-   
+        });
+    }
+    else {
+      this.assignmentsService.getAssignments()
+        .subscribe(assignments => {
+          this.assignments = assignments
+        });
+    }
   }
 
-  assignmentClique(assignment:Assignment){
+  assignmentClique(assignment: Assignment) {
     console.log("assignmentClique : " + assignment.nom);
     this.assignmentSelectionne = assignment;
   }
 
-  
-  
+
+
 }
