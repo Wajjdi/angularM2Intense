@@ -40,12 +40,16 @@ export class AssignmentsComponent implements OnInit {
 
    ngOnInit(): void {
     console.log("appelé à l'initialisation du composant");
+    //this.assignmentsService.peuplerBD();
     this.assignmentsService.getAssignments()
     .subscribe(assignments  => {
       this.assignments = assignments
+
       this.pageSlice = this.assignments.slice(0,3)
 
+
     });
+   
       
   }
 
