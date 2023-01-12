@@ -77,25 +77,7 @@ export class AssignmentsComponent implements OnInit {
 
   hideData() {
     this.hide = !this.hide;
-    if (this.hide == true) {
-      this.assignmentsService.getAssignments()
-        .subscribe(assignments => {
-          this.assignments = assignments
-          for (let i = 0; i < assignments.length; i++) {
-            console.log(assignments[i], this.element)
-            if (assignments[i].rendu == true) {
-              this.element = false;
-              console.log("acc", assignments[i], this.element)
-            }
-          }
-        });
-    }
-    else {
-      this.assignmentsService.getAssignments()
-        .subscribe(assignments => {
-          this.assignments = assignments
-        });
-    }
+    this.assignmentsService.getAssignments()
   }
 
   assignmentClique(assignment: Assignment) {
