@@ -13,6 +13,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,7 +50,8 @@ const routes: Routes = [
     path: 'assignment/:id/edit',
     component: EditAssignmentComponent,
     canActivate:[AuthGuard]
-  }
+  },
+  
 ]
 
 @NgModule({
@@ -68,7 +71,7 @@ const routes: Routes = [
     MatNativeDateModule, MatListModule, MatCardModule,
     MatCheckboxModule, MatSlideToggleModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule, MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

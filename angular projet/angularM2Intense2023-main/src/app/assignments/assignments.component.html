@@ -8,6 +8,9 @@
     </button>
 </a>
 
+
+
+
 <div>
   <input  type="text" placeholder="Search"  [(ngModel)]="searchText">
   <table >
@@ -18,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let a of assignments | search: searchText ">
+      <tr *ngFor="let a of pageSlice | search: searchText    ">
         <td>{{a.id}}</td>
         <td>{{a.nom}}</td>
       </tr>
@@ -27,6 +30,15 @@
   </table>
 </div>
 
+
+<mat-paginator class="mat-elevation-z8"
+[length]="this.assignments.length"
+[pageSize]="3"
+[pageSizeOptions]="[3, 5, 10]"
+(page)="OnPageChange($event)"
+>
+
+</mat-paginator>
 
 <button  (click)="hideData()">Hide Data</button>
 
