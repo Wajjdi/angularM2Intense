@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import{MatToolbarModule} from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -71,7 +72,7 @@ const routes: Routes = [
     MatNativeDateModule, MatListModule, MatCardModule,
     MatCheckboxModule, MatSlideToggleModule,
     RouterModule.forRoot(routes),
-    HttpClientModule, MatPaginatorModule,MatTableModule,
+    HttpClientModule, MatPaginatorModule,MatTableModule,MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

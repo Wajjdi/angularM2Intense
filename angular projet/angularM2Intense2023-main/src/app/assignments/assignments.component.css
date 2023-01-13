@@ -1,11 +1,10 @@
-table, tr, td {
-  border-collapse: collapse;
+
+table {
+  width: 100%;
 }
 
-.mat-mdc-row .mat-mdc-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
+th.mat-sort-header-sorted {
+  color: black;
 }
 
 .rendu {
@@ -14,6 +13,4 @@ table, tr, td {
 .nonRendu {
   color:red;
 }
-table {
-  width: 100%;
-}
+

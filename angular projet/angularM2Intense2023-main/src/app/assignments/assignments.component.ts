@@ -16,7 +16,7 @@ import * as e from 'express';
 
 export class AssignmentsComponent implements OnInit {
 
-  hide = true;
+  hide = false;
   currentItemsToShow = [];
   titre = "Liste des devoirs";
   assignmentSelectionne!: Assignment;
@@ -27,7 +27,7 @@ export class AssignmentsComponent implements OnInit {
  
   pageEvent: PageEvent;
   pageSlice = this.assignments.slice(0, 10)
-  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu', 'nomAuteur', 'nomMatiere',"note","remarque","imgProf","imgMatiere"];
+  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu', 'nomAuteur', 'nomMatiere',"note","remarque","imgProf","imgMatiere","edit"];
 
 
   constructor(private assignmentsService: AssignmentsService) {
