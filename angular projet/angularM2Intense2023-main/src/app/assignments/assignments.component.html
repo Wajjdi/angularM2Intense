@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let a of pageSlice | search: searchText    ">
+        <tr *ngFor="let a of pageSlice | search: searchText ">
           <td>{{a.id}}</td>
           <td>{{a.nom}}</td>
         </tr>
@@ -30,15 +30,82 @@
   </div>
 
 
-  <mat-paginator class="mat-elevation-z8" [length]="this.assignments.length" [pageSize]="3"
-    [pageSizeOptions]="[3, 5, 10]" (page)="OnPageChange($event)">
-
-  </mat-paginator>
-
+ 
   <button (click)="hideData()">Hide Data</button>
 
-  <mat-list *ngFor="let a of assignments">
+  <div class="mat-elevation-z8">
+  <table mat-table  [dataSource]="pageSlice"  >
 
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"><div *ngIf="hide || element.rendu !== false">{{element.id}}</div> </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <td mat-cell *matCellDef="let element"><div *ngIf="hide || element.rendu !== false"> {{element.nom}} </div></td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="dateDeRendu">
+      <th mat-header-cell *matHeaderCellDef> Date de Rendu </th>
+      <td mat-cell *matCellDef="let element"> <div *ngIf="hide || element.rendu !== false">{{element.dateDeRendu}}</div> </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="rendu">
+      <th mat-header-cell *matHeaderCellDef> Rendu </th>
+      <td mat-cell *matCellDef="let element"><div *ngIf="hide || element.rendu !== false">{{element.rendu}}</div>  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nomAuteur">
+      <th mat-header-cell *matHeaderCellDef> nom Auteur </th>
+      <td mat-cell *matCellDef="let element"> <div *ngIf="hide || element.rendu !== false">{{element.nomAuteur}}</div> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nomMatiere">
+      <th mat-header-cell *matHeaderCellDef> Nom matiere </th>
+      <td mat-cell *matCellDef="let element"><div *ngIf="hide || element.rendu !== false">{{element.nomMatiere}}</div>  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="note">
+      <th mat-header-cell *matHeaderCellDef> Note </th>
+      <td mat-cell *matCellDef="let element"><div *ngIf="hide || element.rendu !== false">{{element.note}}</div>  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="remarque">
+      <th mat-header-cell *matHeaderCellDef> Remarque </th>
+      <td mat-cell *matCellDef="let element" width="250"><div *ngIf="hide || element.rendu !== false">{{element.remarque}}</div>  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="imgProf">
+      <th mat-header-cell *matHeaderCellDef> Prof </th>
+      <td mat-cell *matCellDef="let element"><div *ngIf="hide || element.rendu !== false"><img src={{element.imgProf}} width="200"
+        height="100"></div>  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="imgMatiere">
+      <th mat-header-cell *matHeaderCellDef> Matiere </th>
+      <td mat-cell *matCellDef="let element"><div *ngIf="hide || element.rendu !== false"><img src={{element.imgMatiere}} width="200"
+        height="100"></div>  </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator  [length]="this.assignments.length" [pageSize]="10"
+  [pageSizeOptions]="[10,15,20]" (page)="OnPageChange($event)">
+
+</mat-paginator>
+</div>
+<!--
+  <mat-list *ngFor="let a of assignments">
+   
     <div *ngIf="hide || a.rendu !== false">
       <nav>
         <a routerLink="/assignment/{{a.id}}">
@@ -73,10 +140,11 @@
 
         <p> {{a.remarque}} </p>
         <p> {{a.note}} </p>
+        <p> {{a.nomMatiere}} </p>
       </div>
 
     </div>
   </mat-list>
-
+-->
 
 </main>

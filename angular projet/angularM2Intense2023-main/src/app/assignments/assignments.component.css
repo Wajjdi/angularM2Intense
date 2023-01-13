@@ -1,12 +1,19 @@
 table, tr, td {
-  border: 1px solid black;
   border-collapse: collapse;
 }
 
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
 
 .rendu {
   color:green;
 }
 .nonRendu {
   color:red;
+}
+table {
+  width: 100%;
 }

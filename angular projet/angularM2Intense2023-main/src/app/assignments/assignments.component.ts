@@ -24,10 +24,10 @@ export class AssignmentsComponent implements OnInit {
   dateDeRendu = true;
   searchText = '';
   assignments: Assignment[] = [];
-
+ 
   pageEvent: PageEvent;
-  pageSlice = this.assignments.slice(0, 3)
-
+  pageSlice = this.assignments.slice(0, 10)
+  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu', 'nomAuteur', 'nomMatiere',"note","remarque","imgProf","imgMatiere"];
 
 
   constructor(private assignmentsService: AssignmentsService) {
@@ -40,13 +40,15 @@ export class AssignmentsComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+   
     console.log("appelé à l'initialisation du composant");
     //this.assignmentsService.peuplerBD();
     this.assignmentsService.getAssignments()
       .subscribe(assignments => {
         this.assignments = assignments
 
-        this.pageSlice = this.assignments.slice(0, 3)
+        this.pageSlice = this.assignments.slice(0, 10)
 
 
       });
