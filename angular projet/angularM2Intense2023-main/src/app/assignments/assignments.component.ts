@@ -3,8 +3,10 @@ import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import * as e from 'express';
+import { MatTableDataSource } from '@angular/material/table';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 
 
@@ -16,6 +18,7 @@ import * as e from 'express';
 
 export class AssignmentsComponent implements OnInit {
 
+
   hide = false;
   currentItemsToShow = [];
   titre = "Liste des devoirs";
@@ -26,11 +29,12 @@ export class AssignmentsComponent implements OnInit {
   assignments: Assignment[] = [];
  
   pageEvent: PageEvent;
-  pageSlice = this.assignments.slice(0, 10)
+  pageSlice :  Assignment[] = [];
   displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu', 'nomAuteur', 'nomMatiere',"note","remarque","imgProf","imgMatiere","edit"];
+  
+  dataSource =new MatTableDataSource(this.pageSlice) ;
 
-
-  constructor(private assignmentsService: AssignmentsService) {
+  constructor(private assignmentsService: AssignmentsService , private _liveAnnouncer: LiveAnnouncer) {
 
   }
   @ViewChild('paginator') paginator: MatPaginator;
@@ -40,30 +44,55 @@ export class AssignmentsComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-   
     console.log("appelé à l'initialisation du composant");
     //this.assignmentsService.peuplerBD();
     this.assignmentsService.getAssignments()
       .subscribe(assignments => {
         this.assignments = assignments
-
-        this.pageSlice = this.assignments.slice(0, 10)
-
-
+        this.pageSlice =this.assignments.slice(0, 10);
+        this.dataSource = new MatTableDataSource(this.pageSlice) 
       });
+     
+  }
+  transform(event: Event, args?: any): void {
+    if (!args) args=event;
+    console.log(event);
+   // args = args.toLowerCase();
 
-
+   // return value.filter((item: any) => {
+      //return JSON.stringify(item).toLowerCase().includes(args);
+  //  })
   }
 
+  @ViewChild(MatSort) sort: MatSort;
+  
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+  announceSortChange(sortState: Sort) {
+    // This example uses English messages. If your application supports
+    // multiple language, you would internationalize these strings.
+    // Furthermore, you can customize the message to add additional
+    // details about the values being sorted.
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+      console.log(sortState.direction);
+      this.dataSource.sort = this.sort;
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
+  
   OnPageChange(event: PageEvent) {
 
     const startIndex = event.pageIndex * event.pageSize
     let endIndex = startIndex + event.pageSize;
     this.pageSlice = this.assignments.slice(startIndex, endIndex)
+    this.dataSource = new MatTableDataSource(this.pageSlice)
     this.getAssignment();
   }
 
+  
   getAssignment() {
     // on récupère l'id dans l'url
     // Le + force la conversion en number

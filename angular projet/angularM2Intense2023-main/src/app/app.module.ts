@@ -15,7 +15,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
-import{MatToolbarModule} from '@angular/material/toolbar';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,7 +29,6 @@ import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assi
 import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { Search } from './assignments/Search';
-
 
 const routes: Routes = [
   {
@@ -72,7 +72,7 @@ const routes: Routes = [
     MatNativeDateModule, MatListModule, MatCardModule,
     MatCheckboxModule, MatSlideToggleModule,
     RouterModule.forRoot(routes),
-    HttpClientModule, MatPaginatorModule,MatTableModule,MatToolbarModule
+    HttpClientModule, MatPaginatorModule,MatTableModule,MatToolbarModule,MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
