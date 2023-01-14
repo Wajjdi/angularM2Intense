@@ -23,9 +23,10 @@
     </mat-form-field>
   </form>
 
-    <button mat-flat-button color="accent" [disabled]="!etat" routerLink="/add"  >
+    <button mat-flat-button color="primary" [disabled]="!etat" routerLink="/add"  >
      Ajouter un assignment
     </button>
+    <button mat-flat-button class="hide" color="primary" (click)="hideData()">Hide Data</button>
 <!--
   <div>
    
@@ -47,7 +48,7 @@
   </div>
 -->
 
-  <button mat-flat-button color="accent" (click)="hideData()">Hide Data</button>
+
 
   <div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" matSort (matSortChange)="announceSortChange($event)">
