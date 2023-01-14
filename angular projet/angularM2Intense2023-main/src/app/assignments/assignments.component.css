@@ -13,7 +13,10 @@ th.mat-sort-header-sorted {
 .nonRendu {
   color:red;
 }
-
+.title{
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
 section {
   display: table;
 }

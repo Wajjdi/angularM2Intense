@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
+import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../assignment.model';
 
 @Component({
@@ -9,7 +10,10 @@ import { Assignment } from '../assignment.model';
   styleUrls: ['./add-assignment.component.css']
 })
 export class AddAssignmentComponent implements OnInit {
-
+  
+  
+title = 'Gestion des assignments';
+etat = false;
 // Pour le formulaire
 nomDevoir = "";
 nomAuteur = "";
@@ -21,11 +25,12 @@ note=0
 dateDeRendu!:Date;
 
   constructor(private assignmentsService:AssignmentsService,
-              private router:ActivatedRoute) { }
+              private router:ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.etatConnection();
   }
-
+ 
   onSubmit(){
     console.log(this.imgProf,"ss")
     if(this.nomMatiere == "Grails"){
@@ -34,7 +39,6 @@ dateDeRendu!:Date;
   }
   else if(this.nomMatiere == "BD"){
     this.imgProf = "../../assets/moi.png"
-
   }
     
     // On ajoute un nouvel assignment
@@ -69,6 +73,30 @@ dateDeRendu!:Date;
   "nomAuteur : " + this.nomAuteur +
   "nomMatiere : " + this.nomMatiere +
   "image" + this.imgProf );
+  }
+
+  login() {
+    console.log()
+    if (!this.authService.loggedIn) {
+      this.authService.logIn();
+      this.authService.isAdmin().then((value: boolean) => {
+        console.log(value)
+        this.etat = value;
+      })
+    } else {
+      this.authService.logOut();
+      this.authService.isAdmin().then((value: boolean) => {
+        console.log(value)
+        this.etat = value;
+      })
+    }
+  }
+  etatConnection(): boolean {
+    this.authService.isAdmin().then((value: boolean) => {
+      console.log(value)
+      this.etat = value;
+    })
+    return this.etat;
   }
 
 

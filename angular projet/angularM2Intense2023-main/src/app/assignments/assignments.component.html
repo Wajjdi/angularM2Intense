@@ -12,7 +12,7 @@
     se deconnecter
   </button>
 </mat-toolbar>
-<h2>{{titre}}</h2>
+<h2 class="title">{{titre}}</h2>
 
 
 <main>
@@ -22,22 +22,10 @@
       <input matInput  (keyup)="transform($event)">
     </mat-form-field>
   </form>
-  
-  <div *ngIf="etat">
-  <a routerLink="/add">
-    <button mat-flat-button color="accent"   >
-      Ajouter Assignment 
+
+    <button mat-flat-button color="accent" [disabled]="!etat" routerLink="/add"  >
+     Ajouter un assignment
     </button>
-  </a>
-</div>
-
-<div *ngIf="!etat">
-    <button mat-flat-button color="accent" [disabled]="true" routerLink="/add"  >
-      Connectez vous pour ajouter un assignment
-    </button>
-</div>
-
-
 <!--
   <div>
    
@@ -58,8 +46,6 @@
     </table>
   </div>
 -->
-
-
 
   <button mat-flat-button color="accent" (click)="hideData()">Hide Data</button>
 

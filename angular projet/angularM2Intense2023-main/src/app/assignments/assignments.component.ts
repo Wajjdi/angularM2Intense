@@ -32,12 +32,12 @@ export class AssignmentsComponent implements OnInit {
   assignments: Assignment[] = [];
   etat = true;
   pageEvent: PageEvent;
-  pageSlice :  Assignment[] = [];
-  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu', 'nomAuteur', 'nomMatiere',"note","remarque","imgProf","imgMatiere","edit"];
-  
-  dataSource =new MatTableDataSource(this.pageSlice) ;
+  pageSlice: Assignment[] = [];
+  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu', 'nomAuteur', 'nomMatiere', "note", "remarque", "imgProf", "imgMatiere", "edit"];
 
-  constructor(private assignmentsService: AssignmentsService , private _liveAnnouncer: LiveAnnouncer,private authService:AuthService) {
+  dataSource = new MatTableDataSource(this.pageSlice);
+
+  constructor(private assignmentsService: AssignmentsService, private _liveAnnouncer: LiveAnnouncer, private authService: AuthService) {
 
   }
   @ViewChild('paginator') paginator: MatPaginator;
@@ -53,31 +53,32 @@ export class AssignmentsComponent implements OnInit {
     this.assignmentsService.getAssignments()
       .subscribe(assignments => {
         this.assignments = assignments
-        this.pageSlice =this.assignments.slice(0, 10);
-        this.dataSource = new MatTableDataSource(this.pageSlice) 
+        this.pageSlice = this.assignments.slice(0, 10);
+        this.dataSource = new MatTableDataSource(this.pageSlice)
       });
-    
+
   }
   transform(event: Event, args?: any): void {
-    if (!args) args=event;
+    if (!args) args = event;
     console.log(event);
-   // args = args.toLowerCase();
+    // args = args.toLowerCase();
 
-   // return value.filter((item: any) => {
-      //return JSON.stringify(item).toLowerCase().includes(args);
-  //  })
+    // return value.filter((item: any) => {
+    //return JSON.stringify(item).toLowerCase().includes(args);
+    //  })
   }
 
-  etatConnection():boolean{
-    this.authService.isAdmin().then((value:boolean)=>{console.log(value)
+  etatConnection(): boolean {
+    this.authService.isAdmin().then((value: boolean) => {
+      console.log(value)
       this.etat = value;
-      })
+    })
     return this.etat;
   }
 
 
   @ViewChild(MatSort) sort: MatSort;
-  
+
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
@@ -94,7 +95,7 @@ export class AssignmentsComponent implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
-  
+
   OnPageChange(event: PageEvent) {
 
     const startIndex = event.pageIndex * event.pageSize
@@ -106,20 +107,22 @@ export class AssignmentsComponent implements OnInit {
 
   login() {
     console.log()
-    if(!this.authService.loggedIn) {
+    if (!this.authService.loggedIn) {
       this.authService.logIn();
-      this.authService.isAdmin().then((value:boolean)=>{console.log(value)
-      this.etat = value;
+      this.authService.isAdmin().then((value: boolean) => {
+        console.log(value)
+        this.etat = value;
       })
     } else {
       this.authService.logOut();
-      this.authService.isAdmin().then((value:boolean)=>{console.log(value)
-      this.etat = value;
-    })
+      this.authService.isAdmin().then((value: boolean) => {
+        console.log(value)
+        this.etat = value;
+      })
     }
   }
 
-  
+
   getAssignment() {
     // on récupère l'id dans l'url
     // Le + force la conversion en number
