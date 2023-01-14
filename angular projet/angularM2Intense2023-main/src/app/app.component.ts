@@ -11,6 +11,9 @@ export class AppComponent {
   etat = false;
   constructor(private authService:AuthService) {}
 
+  
+
+
   login() {
     console.log()
     if(!this.authService.loggedIn) {

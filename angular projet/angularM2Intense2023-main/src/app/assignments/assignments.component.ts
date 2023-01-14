@@ -20,6 +20,7 @@ import { AuthService } from '../shared/auth.service';
 
 export class AssignmentsComponent implements OnInit {
 
+  title = 'Gestion des assignments';
 
   hide = false;
   currentItemsToShow = [];
@@ -55,7 +56,7 @@ export class AssignmentsComponent implements OnInit {
         this.pageSlice =this.assignments.slice(0, 10);
         this.dataSource = new MatTableDataSource(this.pageSlice) 
       });
-     
+    
   }
   transform(event: Event, args?: any): void {
     if (!args) args=event;
@@ -101,6 +102,21 @@ export class AssignmentsComponent implements OnInit {
     this.pageSlice = this.assignments.slice(startIndex, endIndex)
     this.dataSource = new MatTableDataSource(this.pageSlice)
     this.getAssignment();
+  }
+
+  login() {
+    console.log()
+    if(!this.authService.loggedIn) {
+      this.authService.logIn();
+      this.authService.isAdmin().then((value:boolean)=>{console.log(value)
+      this.etat = value;
+      })
+    } else {
+      this.authService.logOut();
+      this.authService.isAdmin().then((value:boolean)=>{console.log(value)
+      this.etat = value;
+    })
+    }
   }
 
   

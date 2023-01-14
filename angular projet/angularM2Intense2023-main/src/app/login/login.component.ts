@@ -20,6 +20,7 @@ export class LoginComponent {
   users: User[] = [];
   mail = "";
   motDePasse = "";
+  etat = false;
 
 
 
@@ -51,7 +52,9 @@ export class LoginComponent {
         
         if((this.motDePasse == this.users[index].motDePasse)&&(this.mail == this.users[index].mail)){
             console.log(true);
+            this.login()
             this.router.navigate(["/home"]);
+
 
         }
         else{
@@ -59,21 +62,22 @@ export class LoginComponent {
             
         }
     }
+} 
 
 
-
-
-
-   /* this.authService.logIn(this.f.email.value, this.f.password.value)
-      .subscribe(
-        (data) => {
-
-        },
-        (error) => {
-          this.error = error;
-          this.loading = false;
-        },
-      );
+login() {
+    console.log()
+    if(!this.authService.loggedIn) {
+      this.authService.logIn();
+      this.authService.isAdmin().then((value:boolean)=>{console.log(value)
+      this.etat = value;
+      })
+    } else {
+      this.authService.logOut();
+      this.authService.isAdmin().then((value:boolean)=>{console.log(value)
+      this.etat = value;
+    })
+    }
   }
-  */
-} }
+
+}

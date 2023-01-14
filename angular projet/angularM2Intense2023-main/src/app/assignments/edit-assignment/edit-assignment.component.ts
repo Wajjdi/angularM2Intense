@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
+import { AuthService } from '../../shared/auth.service';
+
 
 @Component({
   selector: 'app-edit-assignment',
@@ -13,10 +15,13 @@ export class EditAssignmentComponent implements OnInit {
   // Pour les champs de formulaire
   nomAssignment:string="";
   dateDeRendu!:Date;
+  etat = true;
+  title = 'Gestion des assignments';
+
 
   constructor(private assignmentsService:AssignmentsService,
               private router:Router,
-              private route:ActivatedRoute) { }
+              private route:ActivatedRoute,private authService:AuthService) { }
 
   ngOnInit(): void {
     // Exemple de récupération de ce qui suit le ? dans l'URL
@@ -31,6 +36,21 @@ export class EditAssignmentComponent implements OnInit {
     console.log(this.route.snapshot.queryParams);
 
     this.getAssignment();
+  }
+
+  login() {
+    console.log()
+    if(!this.authService.loggedIn) {
+      this.authService.logIn();
+      this.authService.isAdmin().then((value:boolean)=>{console.log(value)
+      this.etat = value;
+      })
+    } else {
+      this.authService.logOut();
+      this.authService.isAdmin().then((value:boolean)=>{console.log(value)
+      this.etat = value;
+    })
+    }
   }
 
   getAssignment() {

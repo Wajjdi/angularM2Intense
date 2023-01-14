@@ -1,3 +1,18 @@
+
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="/home">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span routerLink="/home">{{title}}</span>
+  <span class="example-spacer"></span>
+  <button *ngIf="!etat"  mat-raised-button color="primary" routerLink="/login">
+    se connecter
+  </button>
+  <button *ngIf="etat"  mat-raised-button color="primary" routerLink="/home"  (click)="login()">
+    se deconnecter
+  </button>
+</mat-toolbar>
+
 <mat-card *ngIf="assignmentTransmis">
   <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
   <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>

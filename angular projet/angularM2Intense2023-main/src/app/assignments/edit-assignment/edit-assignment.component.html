@@ -1,3 +1,20 @@
+
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="/home">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span routerLink="/home">{{title}}</span>
+  <span class="example-spacer"></span>
+  <button *ngIf="!etat"  mat-raised-button color="primary" routerLink="/login">
+    se connecter
+  </button>
+  <button *ngIf="etat"  mat-raised-button color="primary" routerLink="/home"  (click)="login()">
+    se deconnecter
+  </button>
+</mat-toolbar>
+
+
+
 <div class="container" *ngIf="assignment">
   <h1>Edition de l'assignment {{assignment.nom}}</h1>
   <form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset(); ">

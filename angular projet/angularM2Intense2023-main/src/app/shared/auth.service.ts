@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../assignments/user.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,8 @@ export class AuthService {
       resolve(this.loggedIn);
     });
   }
+
+  
 
   constructor() {
     this.user = new User();
