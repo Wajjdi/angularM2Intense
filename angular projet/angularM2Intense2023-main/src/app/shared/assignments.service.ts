@@ -51,7 +51,7 @@ export class AssignmentsService {
   constructor(private loggingService:LoggingService,
               private http:HttpClient) { }
 
-  uri = "http://localhost:8010/api/assignments";
+  uri = "http://localhost:8011/api/assignments";
 
   getAssignments():Observable<Assignment[]> {
     //return of(this.assignments);

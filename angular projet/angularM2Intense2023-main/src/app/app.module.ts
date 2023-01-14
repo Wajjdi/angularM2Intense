@@ -29,6 +29,7 @@ import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assi
 import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { Search } from './assignments/Search';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,11 @@ const routes: Routes = [
     component: EditAssignmentComponent,
     canActivate:[AuthGuard]
   },
+
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   
 ]
 
@@ -62,7 +68,8 @@ const routes: Routes = [
     AssignmentDetailComponent,
     AddAssignmentComponent,
     EditAssignmentComponent,
-    Search
+    Search,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

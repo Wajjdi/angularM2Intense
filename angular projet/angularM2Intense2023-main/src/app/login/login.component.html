@@ -1,0 +1,23 @@
+<p>login works!</p>
+<form  (ngSubmit)="onSubmit()">
+    <label>
+      Email
+      <input  [(ngModel)]="mail" name="mail"  />
+      <div  class="invalid-feedback">
+        <div >Email is required</div>
+        <div >Email must be a valid email address</div>
+      </div>
+    </label>
+    <br />
+    <label>
+      Password
+      <input   [(ngModel)]="motDePasse" name="motDePasse"  />
+      <div class="invalid-feedback">
+        <div>Password is required</div>
+        <div >Password must be at least 6 characters</div>
+      </div>
+    </label>
+    <br />
+    <button >Login</button>
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  </form>

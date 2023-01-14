@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
+import { User } from '../assignments/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   loggedIn = false;
-
+  user : User;
   // Dans la vraie vie (dans le projet à faire), on
   // passerait login et password.
   logIn() {
     this.loggedIn = true;
+    console.log( this.loggedIn)
+   
   }
 
   logOut() {
     this.loggedIn = false;
+    console.log( this.loggedIn)
+   
   }
 
   isAdmin():Promise<boolean> {
@@ -22,5 +27,7 @@ export class AuthService {
     });
   }
 
-  constructor() {}
+  constructor() {
+    this.user = new User();
+  }
 }

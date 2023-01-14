@@ -7,6 +7,8 @@ import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import * as e from 'express';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { AuthService } from '../shared/auth.service';
+
 
 
 
@@ -27,14 +29,14 @@ export class AssignmentsComponent implements OnInit {
   dateDeRendu = true;
   searchText = '';
   assignments: Assignment[] = [];
- 
+  etat = true;
   pageEvent: PageEvent;
   pageSlice :  Assignment[] = [];
   displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu', 'nomAuteur', 'nomMatiere',"note","remarque","imgProf","imgMatiere","edit"];
   
   dataSource =new MatTableDataSource(this.pageSlice) ;
 
-  constructor(private assignmentsService: AssignmentsService , private _liveAnnouncer: LiveAnnouncer) {
+  constructor(private assignmentsService: AssignmentsService , private _liveAnnouncer: LiveAnnouncer,private authService:AuthService) {
 
   }
   @ViewChild('paginator') paginator: MatPaginator;
@@ -45,6 +47,7 @@ export class AssignmentsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("appelé à l'initialisation du composant");
+    this.etatConnection()
     //this.assignmentsService.peuplerBD();
     this.assignmentsService.getAssignments()
       .subscribe(assignments => {
@@ -63,6 +66,14 @@ export class AssignmentsComponent implements OnInit {
       //return JSON.stringify(item).toLowerCase().includes(args);
   //  })
   }
+
+  etatConnection():boolean{
+    this.authService.isAdmin().then((value:boolean)=>{console.log(value)
+      this.etat = value;
+      })
+    return this.etat;
+  }
+
 
   @ViewChild(MatSort) sort: MatSort;
   

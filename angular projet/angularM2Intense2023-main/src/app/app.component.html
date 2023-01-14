@@ -7,8 +7,11 @@
     </button>
     <span routerLink="/home">{{title}}</span>
     <span class="example-spacer"></span>
-    <button  mat-raised-button color="primary">
+    <button *ngIf="!etat"  mat-raised-button color="primary" routerLink="/login">
       se connecter
+    </button>
+    <button *ngIf="etat"  mat-raised-button color="primary" routerLink="/home"  (click)="login()">
+      se deconnecter
     </button>
   </mat-toolbar>
   <mat-slide-toggle (click)="login()">Log In</mat-slide-toggle>
