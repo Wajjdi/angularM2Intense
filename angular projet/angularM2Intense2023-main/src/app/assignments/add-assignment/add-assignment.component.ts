@@ -34,12 +34,22 @@ dateDeRendu!:Date;
   onSubmit(){
     console.log(this.imgProf,"ss")
     if(this.nomMatiere == "Grails"){
-      this.imgProf = "../../assets/grigri.png"
-      this.imgMatiere =  "../../assets/grigri.png"
+      this.imgProf = "../../../assets/moi.png"
+      this.imgMatiere =  "../../../assets/grails.png"
   }
-  else if(this.nomMatiere == "BD"){
+  if(this.nomMatiere == "BD"){
     this.imgProf = "../../assets/moi.png"
+    this.imgMatiere =  "../../../assets/bd.jpg"
   }
+ if(this.nomMatiere == "Technologie"){
+    this.imgProf = "../../../assets/elon.jpg"
+    this.imgMatiere =  "../../../assets/technologie.png"
+  }
+  if(this.nomMatiere == "Football"){
+    this.imgProf = "../../../assets/guardiola.jpg"
+    this.imgMatiere =  "../../../assets/foot.jpg"
+  }
+  
     
     // On ajoute un nouvel assignment
     let nouvelAssignment = new Assignment();
