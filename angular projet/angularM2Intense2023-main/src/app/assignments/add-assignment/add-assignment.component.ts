@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../assignment.model';
@@ -24,8 +24,8 @@ remarque = "";
 note=0
 dateDeRendu!:Date;
 
-  constructor(private assignmentsService:AssignmentsService,
-              private router:ActivatedRoute, private authService: AuthService) { }
+  constructor(private assignmentsService:AssignmentsService, private router:Router,
+    private route:ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.etatConnection();
@@ -73,7 +73,7 @@ dateDeRendu!:Date;
       console.log(reponse.message);
       // ON VA DEVOIR NAVIGUER AVEC LE ROUTER
       // VERS LE COMPOSANT QUI AFFICHE LA LISTE
-      //this.router.navigate(['/home']);
+      this.router.navigate(["/home"]);
     });
     
 

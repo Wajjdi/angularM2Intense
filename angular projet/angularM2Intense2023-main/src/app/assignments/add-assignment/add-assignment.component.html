@@ -12,7 +12,7 @@
   </button>
 </mat-toolbar>
 
-<div *ngIf="etat"> 
+<div *ngIf="etat">
 <mat-card class="example-card">
 
   <form (submit)="onSubmit(); assignmentForm.reset()" ngForm #assignmentForm class="form">
@@ -37,7 +37,7 @@
       <mat-label>Choose an option</mat-label>
       <select required matNativeControl [(ngModel)]="nomMatiere" name="matiere">
         <option value="" selected></option>
-        <option value="Grails">Grails</option>
+        <option value="Basket">Basket</option>
         <option value="BD">BD</option>
         <option value="Football">Football</option>
         <option value="Technologie">Technologie</option>
@@ -58,7 +58,7 @@
       <textarea matInput [(ngModel)]="remarque" name="rmq" placeholder="Laissez une remarque"></textarea>
     </mat-form-field>
 
-      <button mat-stroked-button color="primary" routerLink="/home" [disabled]="((!nomDevoir)|| (!nomAuteur)|| (!nomMatiere) ||(!dateDeRendu))">
+      <button mat-stroked-button color="primary"  [disabled]="((!nomDevoir)|| (!nomAuteur)|| (!nomMatiere) ||(!dateDeRendu))">
         Ajouter un devoir
       </button>
   
