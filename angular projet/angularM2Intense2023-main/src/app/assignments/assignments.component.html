@@ -26,7 +26,7 @@
     <button mat-flat-button color="primary" [disabled]="!etat" routerLink="/add"  >
      Ajouter un assignment
     </button>
-    <button mat-flat-button class="hide" color="primary" (click)="hideData()">Hide Data</button>
+    <button mat-flat-button class="hide" color="primary" (click)="hideData()">Hide false</button>
 <!--
   <div>
    
@@ -82,7 +82,7 @@
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="rendu">
-        <th mat-header-cell *matHeaderCellDef> Rendu </th>
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header > Rendu </th>
         <td mat-cell *matCellDef="let element">
           <div *ngIf="!hide || element.rendu !== false">{{element.rendu}}</div>
         </td>
